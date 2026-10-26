@@ -1,0 +1,14 @@
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\bin\Debug\net10.0\CMR.exe
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\bin\Debug\net10.0\CMR.deps.json
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\bin\Debug\net10.0\CMR.runtimeconfig.json
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\bin\Debug\net10.0\CMR.dll
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\bin\Debug\net10.0\CMR.pdb
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.AssemblyInfoInputs.cache
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.AssemblyInfo.cs
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.csproj.CoreCompileInputs.cache
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.dll
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\refint\CMR.dll
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.pdb
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\CMR.genruntimeconfig.cache
+C:\Users\Equipo\Desktop\TP INTEGRADOR FINAL 2\TP INTEGRADOR FINAL\CMR\obj\Debug\net10.0\ref\CMR.dll
