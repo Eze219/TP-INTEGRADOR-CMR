@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CMR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce48be108b7a344fe8dcbf9234a3c30af9cb28fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("CMR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CMR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
