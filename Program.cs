@@ -1,4 +1,15 @@
-﻿// Creación de usuarios
+﻿using Microsoft.Data.SqlClient;
+// Instanciamos la clase para poder utilizar los métodos:
+// Conexion conexion = new Conexion();
+
+// using (SqlConnection sql = conexion.obtenerConexion())
+// {
+//     sql.Open();
+//     Console.WriteLine("conexion exitosa");
+// }
+
+
+// Creación de usuarios
 List<Usuarios> listaUsuarios = new List<Usuarios>();
 
 Usuarios usuarioAdmin = new Usuarios();
@@ -9,6 +20,9 @@ usuarioAdmin.UsuarioNombre = "cmartinez";
 usuarioAdmin.Contrasena = "Admin2026*";
 usuarioAdmin.Rol = "Administrador"; 
 listaUsuarios.Add(usuarioAdmin);
+DatosUsuarios datosUsuarios = new DatosUsuarios();
+int DatosUsuarios = datosUsuarios.GuardarUsuario(usuarioAdmin);
+Console.WriteLine("se guardo");
 
 Usuarios usuarioEmpleado = new Usuarios();
 usuarioEmpleado.IdUsuario = 2;
@@ -19,6 +33,10 @@ usuarioEmpleado.Contrasena = "EmpClave1";
 usuarioEmpleado.Rol = "Empleado"; 
 listaUsuarios.Add(usuarioEmpleado);
 
+int datosUsuariosEmp1 = datosUsuarios.GuardarUsuario(usuarioEmpleado);
+Console.WriteLine("se guardo");
+
+
 Usuarios usuarioEmpleado2 = new Usuarios();
 usuarioEmpleado2.IdUsuario = 3;
 usuarioEmpleado2.Nombre = "Matías";
@@ -28,7 +46,10 @@ usuarioEmpleado2.Contrasena = "Taller2026";
 usuarioEmpleado2.Rol = "Empleado"; 
 listaUsuarios.Add(usuarioEmpleado2);
 
+int datosUsuariosEmp2 = datosUsuarios.GuardarUsuario(usuarioEmpleado2);
+Console.WriteLine("se guardo");
 
+/*
 // 1. Llamamos a la función de verificación y guardamos el resultado
 Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
 Usuarios usuarioEncontrado = VerificacionUsuarioContraseña(listaUsuarios);
@@ -105,3 +126,4 @@ void Bienvenida(Usuarios userValidado)
 
 
 //Colocar menús y seguir con las funcionalidades de cada rol
+*/
