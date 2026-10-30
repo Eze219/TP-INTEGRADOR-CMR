@@ -92,10 +92,12 @@ Console.WriteLine("se guardo");
 
 // Creación de insumos
 List<Insumos> listaInsumos = new List<Insumos>();
-
-
 Insumos insumos = new Insumos();
 
+
+// Creación de repuestos
+List<Repuestos> listaRepuestos = new List<Repuestos>();
+Repuestos repuestos = new Repuestos();
 
 /*
 // 1. Llamamos a la función de verificación y guardamos el resultado
