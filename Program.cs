@@ -49,6 +49,54 @@ listaUsuarios.Add(usuarioEmpleado2);
 int datosUsuariosEmp2 = datosUsuarios.GuardarUsuario(usuarioEmpleado2);
 Console.WriteLine("se guardo");
 
+// Creación de historial de movimientos
+
+
+List<Historial> listaHistorial = new List<Historial>();
+
+Historial historialIngresoRepuestos = new Historial();
+historialIngresoRepuestos.FechaHora = DateTime.Now;
+historialIngresoRepuestos.TipoMovimiento = "Ingreso de repuestos";
+listaHistorial.Add(historialIngresoRepuestos);
+
+DatosHistorial datosHistorial = new DatosHistorial();
+int DatosHistorialIngresoRep = datosHistorial.GuardarMovimientos(historialIngresoRepuestos);
+Console.WriteLine("se guardo");
+
+Historial historialEgresoRepuestos = new Historial();
+historialEgresoRepuestos.FechaHora = DateTime.Now;
+historialEgresoRepuestos.TipoMovimiento = "Egreso de repuestos";
+listaHistorial.Add(historialEgresoRepuestos);
+
+
+int DatosHistorialEgresoRep = datosHistorial.GuardarMovimientos(historialEgresoRepuestos);
+Console.WriteLine("se guardo");
+
+Historial historialIngresoInsumos = new Historial();
+historialIngresoInsumos.FechaHora = DateTime.Now;
+historialIngresoInsumos.TipoMovimiento = "Ingreso de insumos";
+
+listaHistorial.Add(historialIngresoInsumos);
+int DatosHistorialIngresoIns = datosHistorial.GuardarMovimientos(historialIngresoInsumos);
+Console.WriteLine("se guardo");
+
+
+Historial historialEgresoInsumos = new Historial();
+historialEgresoInsumos.FechaHora = DateTime.Now;
+historialEgresoInsumos.TipoMovimiento = "Egreso de insumos";
+
+listaHistorial.Add(historialEgresoInsumos);
+int DatosHistorialEgresoIns = datosHistorial.GuardarMovimientos(historialEgresoInsumos);
+Console.WriteLine("se guardo");
+
+
+// Creación de insumos
+List<Insumos> listaInsumos = new List<Insumos>();
+
+
+Insumos insumos = new Insumos();
+
+
 /*
 // 1. Llamamos a la función de verificación y guardamos el resultado
 Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
