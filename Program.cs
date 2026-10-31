@@ -100,14 +100,56 @@ List<Repuestos> listaRepuestos = new List<Repuestos>();
 Repuestos repuestos = new Repuestos();
 
 /*
-// 1. Llamamos a la función de verificación y guardamos el resultado
-Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
-Usuarios usuarioEncontrado = VerificacionUsuarioContraseña(listaUsuarios);
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║             SISTEMA DE STOCK             ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║            ¡Bienvenido a CMR!            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║       Gestion de repuestos e insumos     ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║             INICIO DE SESION             ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   Nombre de usuario:                     ║");
+Console.WriteLine("║   Contraseña:                            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║   1. Iniciar sesion                      ║");
+Console.WriteLine("║   2. Salir                               ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine();
+Console.WriteLine("  Seleccione una opcion: ");
 
-// 2. Una vez que tenemos el usuario verificado, pasamos a la bienvenida/menú
-Bienvenida(usuarioEncontrado);
+string opcion = Console.ReadLine();
 
+    switch (opcion)
+    {
+        case "1":
+            Console.Clear();
+            Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
+            // Llamamos a tu función intacta
+            Usuarios usuarioEncontrado = VerificacionUsuarioContraseña(listaUsuarios);
+            Bienvenida(usuarioEncontrado);
+            
+            Console.WriteLine("\nPresione una tecla para volver al menú principal...");
+            Console.ReadKey();
+            break;
 
+        case "2":
+            salir = true;
+            Console.WriteLine("\nSaliendo del sistema... ¡Hasta luego!");
+            break;
+
+        default:
+            Console.WriteLine("\n[Error] Opción no válida. Presione una tecla para intentar de nuevo.");
+            Console.ReadKey();
+            break;
+    }
+}
 
 // --- MÉTODOS Y MENÚS ---
 
@@ -177,3 +219,155 @@ void Bienvenida(Usuarios userValidado)
 
 //Colocar menús y seguir con las funcionalidades de cada rol
 */
+
+
+
+
+
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║              SISTEMA DE STOCK            ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   1. Agregar / Despachar                 ║");
+Console.WriteLine("║   2. Modificar / Eliminar                ║");
+Console.WriteLine("║   3. Ver inventario                      ║");
+Console.WriteLine("║   4. Salir                               ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine();
+Console.WriteLine("  Seleccione una opcion: ");
+
+
+
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║              GESTION DE STOCK            ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   REPUESTOS                              ║");
+Console.WriteLine("║   1. Agregar repuesto                    ║");
+Console.WriteLine("║   2. Despachar repuesto                  ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   INSUMOS                                ║");
+Console.WriteLine("║   3. Agregar insumo                      ║");
+Console.WriteLine("║   4. Despachar insumo                    ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   0. Volver al menu principal            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine();
+Console.WriteLine("  Seleccione una opcion: ");
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║              GESTION DE STOCK            ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   1. Agregar producto                    ║");
+Console.WriteLine("║   2. Despachar producto                  ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   0. Volver al menu principal            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║            TIPO DE PRODUCTO              ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   1. Repuestos                           ║");
+Console.WriteLine("║   2. Insumos                             ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   0. Volver                              ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║             AGREGAR PRODUCTO             ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   Codigo:                                ║");
+Console.WriteLine("║   Nombre:                                ║");
+Console.WriteLine("║   Cantidad inicial:                      ║");
+Console.WriteLine("║   Precio de compra por unidad:           ║");
+Console.WriteLine("║   Stock minimo:                          ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║   1. Confirmar registro                  ║");
+Console.WriteLine("║   0. Cancelar                            ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║            DESPACHAR PRODUCTO            ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   Codigo o nombre del producto:          ║");
+Console.WriteLine("║   Stock disponible:                      ║");
+Console.WriteLine("║   Cantidad a despachar:                  ║");
+Console.WriteLine("║   Motivo del despacho:                   ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║   1. Confirmar despacho                  ║");
+Console.WriteLine("║   0. Cancelar                            ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║           MODIFICAR / ELIMINAR           ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   REPUESTOS                              ║");
+Console.WriteLine("║   1. Modificar repuesto                  ║");
+Console.WriteLine("║   2. Eliminar repuesto                   ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   INSUMOS                                ║");
+Console.WriteLine("║   3. Modificar insumo                    ║");
+Console.WriteLine("║   4. Eliminar insumo                     ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   0. Volver al menu principal            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine();
+Console.WriteLine("  Seleccione una opcion: ");
+
+
+
+Console.WriteLine("╔══════════════════════════════════════════╗");
+Console.WriteLine("║                INVENTARIO                ║");
+Console.WriteLine("╠══════════════════════════════════════════╣");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   1. Ver repuestos                       ║");
+Console.WriteLine("║   2. Ver insumos                         ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("║   0. Volver al menu principal            ║");
+Console.WriteLine("║                                          ║");
+Console.WriteLine("╚══════════════════════════════════════════╝");
+Console.WriteLine();
+Console.WriteLine("  Seleccione una opcion: ");
