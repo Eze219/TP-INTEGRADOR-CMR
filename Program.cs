@@ -140,7 +140,24 @@ void Bienvenida(Usuarios userValidado)
 // Console.WriteLine("  Seleccione una opcion: ");
 
 
+//------------------------------------------------------------------------
+// ---------------------------MENU EMPLEADO-------------------------------
+//------------------------------------------------------------------------
+// Console.WriteLine("╔══════════════════════════════════════════╗");
+// Console.WriteLine("║              SISTEMA DE STOCK            ║");
+// Console.WriteLine("╠══════════════════════════════════════════╣");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("║   1. Despachar                           ║");
+// Console.WriteLine("║   2. Ver inventario                      ║");
+// Console.WriteLine("║   3. Salir                               ║");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("╚══════════════════════════════════════════╝");
+// Console.WriteLine();
+// Console.WriteLine("  Seleccione una opcion: ");
 
+//------------------------------------------------------------------------
+// -----------------------MENU ADMINISTRADOR------------------------------
+//------------------------------------------------------------------------
 // Console.WriteLine("╔══════════════════════════════════════════╗");
 // Console.WriteLine("║              GESTION DE STOCK            ║");
 // Console.WriteLine("╠══════════════════════════════════════════╣");
@@ -158,6 +175,29 @@ void Bienvenida(Usuarios userValidado)
 // Console.WriteLine("╚══════════════════════════════════════════╝");
 // Console.WriteLine();
 // Console.WriteLine("  Seleccione una opcion: ");
+
+//------------------------------------------------------------------------
+// ---------------------------MENU EMPLEADO-------------------------------
+//------------------------------------------------------------------------
+// Console.WriteLine("╔══════════════════════════════════════════╗");
+// Console.WriteLine("║              GESTION DE STOCK            ║");
+// Console.WriteLine("╠══════════════════════════════════════════╣");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("║   REPUESTOS                              ║");
+// Console.WriteLine("║   1. Despachar repuesto                  ║");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("║   INSUMOS                                ║");
+// Console.WriteLine("║   2. Despachar insumo                    ║");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("║   0. Volver al menu principal            ║");
+// Console.WriteLine("║                                          ║");
+// Console.WriteLine("╚══════════════════════════════════════════╝");
+// Console.WriteLine();
+// Console.WriteLine("  Seleccione una opcion: ");
+
+
+
+
 // Console.WriteLine("╔══════════════════════════════════════════╗");
 // Console.WriteLine("║              GESTION DE STOCK            ║");
 // Console.WriteLine("╠══════════════════════════════════════════╣");
