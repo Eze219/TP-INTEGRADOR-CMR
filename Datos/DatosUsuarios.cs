@@ -21,4 +21,32 @@ public class DatosUsuarios
             return comando.ExecuteNonQuery();
         }
     }
+    public Usuarios ObtenerUsuarioPorNombre(string nombreUsuario)
+    {
+        Conexion conexion = new Conexion();
+
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "SELECT nombre, usuario, contraseña, dni, rol FROM Usuarios WHERE usuario = @usuario";
+            SqlCommand comando = new SqlCommand(consulta, sql);
+            comando.Parameters.AddWithValue("@usuario", nombreUsuario);
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    Usuarios usuario = new Usuarios();
+                    usuario.Nombre = reader.GetString(0);
+                    usuario.UsuarioNombre = reader.GetString(1);
+                    usuario.Contrasena = reader.GetString(2);
+                    usuario.Dni = reader.GetInt32(3);
+                    usuario.Rol = reader.GetString(4);
+
+                    return usuario;
+                }
+            }
+        }
+        return null;
+    }
 }
+

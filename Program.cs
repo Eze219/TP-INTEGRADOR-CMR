@@ -1,104 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
 // Instanciamos la clase para poder utilizar los métodos:
-// Conexion conexion = new Conexion();
+Conexion conexion = new Conexion();
 
-// using (SqlConnection sql = conexion.obtenerConexion())
-// {
-//     sql.Open();
-//     Console.WriteLine("conexion exitosa");
-// }
-
-
-// Creación de usuarios
-List<Usuarios> listaUsuarios = new List<Usuarios>();
-
-// Usuarios usuarioAdmin = new Usuarios();
-// usuarioAdmin.IdUsuario = 1;
-// usuarioAdmin.Nombre = "Carlos";
-// usuarioAdmin.Dni = 35489123;
-// usuarioAdmin.UsuarioNombre = "cmartinez";
-// usuarioAdmin.Contrasena = "Admin2026*";
-// usuarioAdmin.Rol = "Administrador"; 
-// listaUsuarios.Add(usuarioAdmin);
-// DatosUsuarios datosUsuarios = new DatosUsuarios();
-// int DatosUsuarios = datosUsuarios.GuardarUsuario(usuarioAdmin);
-// Console.WriteLine("se guardo");
-
-// Usuarios usuarioEmpleado = new Usuarios();
-// usuarioEmpleado.IdUsuario = 2;
-// usuarioEmpleado.Nombre = "Lucía";
-// usuarioEmpleado.Dni = 40123789;
-// usuarioEmpleado.UsuarioNombre = "lfernandez";
-// usuarioEmpleado.Contrasena = "EmpClave1";
-// usuarioEmpleado.Rol = "Empleado"; 
-// listaUsuarios.Add(usuarioEmpleado);
-
-// int datosUsuariosEmp1 = datosUsuarios.GuardarUsuario(usuarioEmpleado);
-// Console.WriteLine("se guardo");
-
-
-// Usuarios usuarioEmpleado2 = new Usuarios();
-// usuarioEmpleado2.IdUsuario = 3;
-// usuarioEmpleado2.Nombre = "Matías";
-// usuarioEmpleado2.Dni = 38765432;
-// usuarioEmpleado2.UsuarioNombre = "mgomez";
-// usuarioEmpleado2.Contrasena = "Taller2026";
-// usuarioEmpleado2.Rol = "Empleado"; 
-// listaUsuarios.Add(usuarioEmpleado2);
-
-// int datosUsuariosEmp2 = datosUsuarios.GuardarUsuario(usuarioEmpleado2);
-// Console.WriteLine("se guardo");
-
-// Creación de historial de movimientos
-
-
-// List<Historial> listaHistorial = new List<Historial>();
-
-// Historial historialIngresoRepuestos = new Historial();
-// historialIngresoRepuestos.FechaHora = DateTime.Now;
-// historialIngresoRepuestos.TipoMovimiento = "Ingreso de repuestos";
-// listaHistorial.Add(historialIngresoRepuestos);
-
-// DatosHistorial datosHistorial = new DatosHistorial();
-// int DatosHistorialIngresoRep = datosHistorial.GuardarMovimientos(historialIngresoRepuestos);
-// Console.WriteLine("se guardo");
-
-// Historial historialEgresoRepuestos = new Historial();
-// historialEgresoRepuestos.FechaHora = DateTime.Now;
-// historialEgresoRepuestos.TipoMovimiento = "Egreso de repuestos";
-// listaHistorial.Add(historialEgresoRepuestos);
-
-
-// int DatosHistorialEgresoRep = datosHistorial.GuardarMovimientos(historialEgresoRepuestos);
-// Console.WriteLine("se guardo");
-
-// Historial historialIngresoInsumos = new Historial();
-// historialIngresoInsumos.FechaHora = DateTime.Now;
-// historialIngresoInsumos.TipoMovimiento = "Ingreso de insumos";
-
-// listaHistorial.Add(historialIngresoInsumos);
-// int DatosHistorialIngresoIns = datosHistorial.GuardarMovimientos(historialIngresoInsumos);
-// Console.WriteLine("se guardo");
-
-
-// Historial historialEgresoInsumos = new Historial();
-// historialEgresoInsumos.FechaHora = DateTime.Now;
-// historialEgresoInsumos.TipoMovimiento = "Egreso de insumos";
-
-// listaHistorial.Add(historialEgresoInsumos);
-// int DatosHistorialEgresoIns = datosHistorial.GuardarMovimientos(historialEgresoInsumos);
-// Console.WriteLine("se guardo");
-
-
-// // Creación de insumos
-// List<Insumos> listaInsumos = new List<Insumos>();
-// Insumos insumos = new Insumos();
-
-
-// // Creación de repuestos
-// List<Repuestos> listaRepuestos = new List<Repuestos>();
-// Repuestos repuestos = new Repuestos();
-
+using (SqlConnection sql = conexion.obtenerConexion())
+{
+    sql.Open();
+    Console.WriteLine("conexion exitosa");
+}
 
 Console.WriteLine("╔══════════════════════════════════════════╗");
 Console.WriteLine("║                                          ║");
@@ -126,29 +34,29 @@ Console.WriteLine("  Seleccione una opcion: ");
 
 string opcion = Console.ReadLine();
 bool salir = false;
-    switch (opcion)
-    {
-        case "1":
-            Console.Clear();
-            Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
-            // Llamamos a tu función intacta
-            Usuarios usuarioEncontrado = VerificacionUsuarioContraseña(listaUsuarios);
-            Bienvenida(usuarioEncontrado);
-            
-            Console.WriteLine("\nPresione una tecla para volver al menú principal...");
-            Console.ReadKey();
-            break;
+switch (opcion)
+{
+    case "1":
+        Console.Clear();
+        Console.WriteLine("=== ACCESO AL SISTEMA DE STOCK ===");
+        // Llamamos a tu función intacta
+        Usuarios usuarioEncontrado = VerificacionUsuarioContraseña();
+        Bienvenida(usuarioEncontrado);
 
-        case "2":
-            salir = true;
-            Console.WriteLine("\nSaliendo del sistema... ¡Hasta luego!");
-            break;
+        Console.WriteLine("\nPresione una tecla para volver al menú principal...");
+        Console.ReadKey();
+        break;
 
-        default:
-            Console.WriteLine("\n[Error] Opción no válida. Presione una tecla para intentar de nuevo.");
-            Console.ReadKey();
-            break;
-    }
+    case "2":
+        salir = true;
+        Console.WriteLine("\nSaliendo del sistema... ¡Hasta luego!");
+        break;
+
+    default:
+        Console.WriteLine("\n[Error] Opción no válida. Presione una tecla para intentar de nuevo.");
+        Console.ReadKey();
+        break;
+}
 
 // --- MÉTODOS Y MENÚS ---
 
@@ -167,7 +75,7 @@ void MenuEmpleado(Usuarios userEmpleado)
 }
 
 // Función que ahora es tipo 'Usuarios' para devolver el usuario que encontró
-Usuarios VerificacionUsuarioContraseña(List<Usuarios> lista)
+Usuarios VerificacionUsuarioContraseña()
 {
     Usuarios usuarioLogueado = null;
 
@@ -178,23 +86,20 @@ Usuarios VerificacionUsuarioContraseña(List<Usuarios> lista)
 
         Console.Write("Contraseña: ");
         string contraseñaIngresada = Console.ReadLine();
+        DatosUsuarios usuarioDB = new DatosUsuarios();
+        usuarioLogueado = usuarioDB.ObtenerUsuarioPorNombre(usuarioIngresado);
 
-        foreach (var u in lista)
-        {
-            if (u.UsuarioNombre == usuarioIngresado && u.Contrasena == contraseñaIngresada)
+        if (usuarioLogueado.UsuarioNombre == usuarioIngresado && usuarioLogueado.Contrasena == contraseñaIngresada)
             {
-                usuarioLogueado = u;
-                break; // Encontró coincidencia, salimos del foreach
-            }
-        }
-    
-        if (usuarioLogueado == null)
+                Console.WriteLine("Usuario encontrado.");
+                return usuarioLogueado;
+            } else
         {
             Console.WriteLine("\n[Error] Usuario o contraseña incorrectos. Vuelve a intentar.");
-        }
+        } 
+        
     }
-
-    return usuarioLogueado; // Devolvemos el usuario ya validado
+    return usuarioLogueado;
 }
 
 
@@ -217,7 +122,6 @@ void Bienvenida(Usuarios userValidado)
 
 
 //Colocar menús y seguir con las funcionalidades de cada rol
-
 
 
 

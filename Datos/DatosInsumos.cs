@@ -19,4 +19,29 @@ public class DatosInsumos
             return comando.ExecuteNonQuery();
         }
     }
+        public Insumos ObtenerInsumoPorNombre(string nombreInsumo)
+    {
+        Conexion conexion = new Conexion();
+
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "SELECT nombre, cantidad_disponible, unidad_medida FROM Insumos WHERE nombreInsumo = @nombre";
+            SqlCommand comando = new SqlCommand(consulta, sql);
+            comando.Parameters.AddWithValue("@nombre", nombreInsumo);
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    Insumos insumo = new Insumos();
+                    insumo.Nombre = reader.GetString(0);
+                    insumo.CantidadDisponible = reader.GetInt32(1);
+                    insumo.UnidadMedida = reader.GetString(2);
+
+                    return insumo;
+                }
+            }
+        }
+        return null;
+    }
 }
