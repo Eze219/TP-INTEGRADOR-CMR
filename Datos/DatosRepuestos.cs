@@ -2,6 +2,7 @@ using Microsoft.Data.SqlClient;
 
 public class DatosRepuestos
 {
+    // Guardar nuevos repuestos
     public int GuardarRepuestos(Repuestos repuesto)
     {
         Conexion conexion = new Conexion();
@@ -9,7 +10,7 @@ public class DatosRepuestos
         {
             sql.Open();
             string consulta =
-            "INSERT INTO Insumos (nombre, cantidad_disponible) VALUES (@nombre, @cantidad_disponible)";
+            "INSERT INTO Repuestos (nombre, cantidad_disponible) VALUES (@nombre, @cantidad_disponible)";
             SqlCommand comando = new SqlCommand(consulta, sql);
 
             comando.Parameters.AddWithValue("@nombre", repuesto.Nombre);
@@ -18,6 +19,7 @@ public class DatosRepuestos
             return comando.ExecuteNonQuery();
         }
     }
+    // Obtener repuestos buscando por nombre
     public Repuestos ObtenerRepuestoPorNombre(string nombreRepuesto)
     {
         Conexion conexion = new Conexion();
@@ -41,5 +43,30 @@ public class DatosRepuestos
             }
         }
         return null;
+    }
+    // Obtener todos los Repuestos
+    public List<Repuestos> ObtenerTodosLosRepuestos()
+    {
+        List<Repuestos> lista = new List<Repuestos>();
+        Conexion conexion = new Conexion();
+
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "SELECT nombre, cantidad_disponible FROM Repuestos";
+            SqlCommand comando = new SqlCommand(consulta, sql);
+
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Repuestos r = new Repuestos();
+                    r.Nombre = reader.GetString(0);
+                    r.CantidadDisponible = reader.GetInt32(1);
+                    lista.Add(r);
+                }
+            }
+        }
+        return lista;
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.Data.SqlClient;
 
 public class DatosInsumos
 {
+    // Guardar insumos nuevos
     public int GuardarInsumos(Insumos insumo)
     {
         Conexion conexion = new Conexion();
@@ -19,7 +20,8 @@ public class DatosInsumos
             return comando.ExecuteNonQuery();
         }
     }
-        public Insumos ObtenerInsumoPorNombre(string nombreInsumo)
+    // Buscar insumos por nombre
+    public Insumos ObtenerInsumoPorNombre(string nombreInsumo)
     {
         Conexion conexion = new Conexion();
 
@@ -43,5 +45,31 @@ public class DatosInsumos
             }
         }
         return null;
+    }
+    // Obtener todos los insumos
+    public List<Insumos> ObtenerTodosLosInsumos()
+    {
+        List<Insumos> lista = new List<Insumos>();
+        Conexion conexion = new Conexion();
+
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "SELECT nombre, cantidad_disponible, unidad_medida FROM Insumos";
+            SqlCommand comando = new SqlCommand(consulta, sql);
+
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Insumos i = new Insumos();
+                    i.Nombre = reader.GetString(0);
+                    i.CantidadDisponible = reader.GetInt32(1);
+                    i.UnidadMedida = reader.GetString(2);
+                    lista.Add(i);
+                }
+            }
+        }
+        return lista;
     }
 }
