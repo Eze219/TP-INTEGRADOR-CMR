@@ -21,32 +21,35 @@ public class DatosUsuarios
             return comando.ExecuteNonQuery();
         }
     }
-    public Usuarios ObtenerUsuarioPorNombre(string nombreUsuario)
+   public Usuarios ObtenerUsuarioPorNombre(string nombreUsuario)
+{
+    Conexion conexion = new Conexion();
+    using (SqlConnection sql = conexion.obtenerConexion())
     {
-        Conexion conexion = new Conexion();
+        sql.Open();
+        string consulta = "SELECT ID_usuario, usuario, contraseña, rol, nombre, dni FROM Usuarios WHERE usuario = @usuario";
+        SqlCommand comando = new SqlCommand(consulta, sql);
+        comando.Parameters.AddWithValue("@usuario", nombreUsuario);
 
-        using (SqlConnection sql = conexion.obtenerConexion())
+        using (SqlDataReader reader = comando.ExecuteReader())
         {
-            sql.Open();
-            string consulta = "SELECT nombre, usuario, contraseña, dni, rol FROM Usuarios WHERE usuario = @usuario";
-            SqlCommand comando = new SqlCommand(consulta, sql);
-            comando.Parameters.AddWithValue("@usuario", nombreUsuario);
-            using (SqlDataReader reader = comando.ExecuteReader())
+            if (reader.Read())
             {
-                if (reader.Read())
-                {
-                    Usuarios usuario = new Usuarios();
-                    usuario.Nombre = reader.GetString(0);
-                    usuario.UsuarioNombre = reader.GetString(1);
-                    usuario.Contrasena = reader.GetString(2);
-                    usuario.Dni = reader.GetInt32(3);
-                    usuario.Rol = reader.GetString(4);
+                Usuarios usuario = new Usuarios();
+                
+                // Aquí lees el ID que ya generó y guardó SQL Server de forma autoincremental:
+                usuario.IdUsuario = reader.GetInt32(0); 
+                usuario.UsuarioNombre = reader.GetString(1);
+                usuario.Contrasena = reader.GetString(2);
+                usuario.Rol = reader.GetString(3);
+                usuario.Nombre = reader.GetString(4);
+                usuario.Dni = reader.GetInt32(5);
 
-                    return usuario;
-                }
+                return usuario;
             }
         }
-        return null;
     }
+    return null;
+}
 }
 

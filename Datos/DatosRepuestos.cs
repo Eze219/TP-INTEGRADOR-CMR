@@ -27,16 +27,24 @@ public class DatosRepuestos
         using (SqlConnection sql = conexion.obtenerConexion())
         {
             sql.Open();
-            string consulta = "SELECT nombre, cantidad_disponible FROM Repuestos WHERE nombreRepuesto = @nombre";
+
+            // 1. Aquí actualizas la consulta (cambia 'nombreRepuesto' por 'nombre' 
+            // y agregas 'id_repuesto' al principio):
+            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible FROM Repuestos WHERE nombre = @nombre";
+
             SqlCommand comando = new SqlCommand(consulta, sql);
             comando.Parameters.AddWithValue("@nombre", nombreRepuesto);
+
             using (SqlDataReader reader = comando.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     Repuestos repuesto = new Repuestos();
-                    repuesto.Nombre = reader.GetString(0);
-                    repuesto.CantidadDisponible = reader.GetInt32(1);
+
+                    // 2. Asignamos los valores teniendo en cuenta el orden de las columnas del SELECT:
+                    repuesto.IdRepuesto = reader.GetInt32(0);
+                    repuesto.Nombre = reader.GetString(1);
+                    repuesto.CantidadDisponible = reader.GetInt32(2);
 
                     return repuesto;
                 }
@@ -45,6 +53,7 @@ public class DatosRepuestos
         return null;
     }
     // Obtener todos los Repuestos
+    // Obtener solo los repuestos activos
     public List<Repuestos> ObtenerTodosLosRepuestos()
     {
         List<Repuestos> lista = new List<Repuestos>();
@@ -53,7 +62,7 @@ public class DatosRepuestos
         using (SqlConnection sql = conexion.obtenerConexion())
         {
             sql.Open();
-            string consulta = "SELECT nombre, cantidad_disponible FROM Repuestos";
+            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible FROM Repuestos WHERE activo = 1";
             SqlCommand comando = new SqlCommand(consulta, sql);
 
             using (SqlDataReader reader = comando.ExecuteReader())
@@ -61,12 +70,44 @@ public class DatosRepuestos
                 while (reader.Read())
                 {
                     Repuestos r = new Repuestos();
-                    r.Nombre = reader.GetString(0);
-                    r.CantidadDisponible = reader.GetInt32(1);
+                    r.IdRepuesto = reader.GetInt32(0);
+                    r.Nombre = reader.GetString(1);
+                    r.CantidadDisponible = reader.GetInt32(2);
                     lista.Add(r);
                 }
             }
         }
         return lista;
+    }
+
+    // Actualizar el stock o nombre de un repuesto existente
+    public int ActualizarRepuesto(Repuestos repuesto)
+    {
+        Conexion conexion = new Conexion();
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "UPDATE Repuestos SET nombre = @nombre, cantidad_disponible = @cantidad_disponible WHERE id_repuesto = @id_repuesto";
+
+            SqlCommand comando = new SqlCommand(consulta, sql);
+            comando.Parameters.AddWithValue("@nombre", repuesto.Nombre);
+            comando.Parameters.AddWithValue("@cantidad_disponible", repuesto.CantidadDisponible);
+            comando.Parameters.AddWithValue("@id_repuesto", repuesto.IdRepuesto);
+
+            return comando.ExecuteNonQuery();
+        }
+    }
+    // Baja Lógica (Actualiza activo a 0 en vez de hacer DELETE)
+    public int EliminarRepuesto(int idRepuesto)
+    {
+        Conexion conexion = new Conexion();
+        using (SqlConnection sql = conexion.obtenerConexion())
+        {
+            sql.Open();
+            string consulta = "UPDATE Repuestos SET activo = 0 WHERE id_repuesto = @id";
+            SqlCommand comando = new SqlCommand(consulta, sql);
+            comando.Parameters.AddWithValue("@id", idRepuesto);
+            return comando.ExecuteNonQuery();
+        }
     }
 }
