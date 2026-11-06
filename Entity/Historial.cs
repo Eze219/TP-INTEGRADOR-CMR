@@ -6,4 +6,8 @@ public class Historial
     public int IdUsuario { get; set; }
     public int? IdRepuesto { get; set; }
     public int? IdInsumo { get; set; }
+
+    // Propiedades virtuales para mostrar los nombres en la tabla (no se mapean en la inserción)
+    public string NombreUsuario { get; set; }
+    public string NombreElemento { get; set; }
 }

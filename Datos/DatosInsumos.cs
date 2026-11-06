@@ -52,32 +52,34 @@ public class DatosInsumos
 
     // Obtener todos los insumos
     // Obtener solo los insumos activos
-    public List<Insumos> ObtenerTodosLosInsumos()
+   public List<Insumos> ObtenerTodosLosInsumos()
+{
+    List<Insumos> lista = new List<Insumos>();
+    Conexion conexion = new Conexion();
+
+    using (SqlConnection sql = conexion.obtenerConexion())
     {
-        List<Insumos> lista = new List<Insumos>();
-        Conexion conexion = new Conexion();
+        sql.Open();
+        string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida FROM Insumos";
+        SqlCommand comando = new SqlCommand(consulta, sql);
 
-        using (SqlConnection sql = conexion.obtenerConexion())
+        using (SqlDataReader reader = comando.ExecuteReader())
         {
-            sql.Open();
-            string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida FROM Insumos WHERE activo = 1";
-            SqlCommand comando = new SqlCommand(consulta, sql);
-
-            using (SqlDataReader reader = comando.ExecuteReader())
+            while (reader.Read())
             {
-                while (reader.Read())
-                {
-                    Insumos i = new Insumos();
-                    i.IdInsumo = reader.GetInt32(0);
-                    i.Nombre = reader.GetString(1);
-                    i.CantidadDisponible = reader.GetInt32(2);
-                    i.UnidadMedida = reader.GetString(3);
-                    lista.Add(i);
-                }
+                Insumos i = new Insumos();
+                
+                i.IdInsumo = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                i.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
+                i.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                i.UnidadMedida = reader.IsDBNull(3) ? "N/A" : reader.GetString(3);
+
+                lista.Add(i);
             }
         }
-        return lista;
     }
+    return lista;
+}
 
     // Actualizar el stock o datos de un insumo existente
     public int ActualizarInsumo(Insumos insumo)

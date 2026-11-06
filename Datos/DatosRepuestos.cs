@@ -10,11 +10,12 @@ public class DatosRepuestos
         {
             sql.Open();
             string consulta =
-            "INSERT INTO Repuestos (nombre, cantidad_disponible) VALUES (@nombre, @cantidad_disponible)";
+            "INSERT INTO Repuestos (nombre, cantidad_disponible, stock_minimo) VALUES (@nombre, @cantidad_disponible, @stock_minimo)";
             SqlCommand comando = new SqlCommand(consulta, sql);
 
             comando.Parameters.AddWithValue("@nombre", repuesto.Nombre);
             comando.Parameters.AddWithValue("@cantidad_disponible", repuesto.CantidadDisponible);
+            comando.Parameters.AddWithValue("@stock_minimo", repuesto.StockMinimo);
 
             return comando.ExecuteNonQuery();
         }
@@ -30,7 +31,7 @@ public class DatosRepuestos
 
             // 1. Aquí actualizas la consulta (cambia 'nombreRepuesto' por 'nombre' 
             // y agregas 'id_repuesto' al principio):
-            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible FROM Repuestos WHERE nombre = @nombre";
+            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible, stock_minimo FROM Repuestos WHERE nombre = @nombre";
 
             SqlCommand comando = new SqlCommand(consulta, sql);
             comando.Parameters.AddWithValue("@nombre", nombreRepuesto);
@@ -45,6 +46,7 @@ public class DatosRepuestos
                     repuesto.IdRepuesto = reader.GetInt32(0);
                     repuesto.Nombre = reader.GetString(1);
                     repuesto.CantidadDisponible = reader.GetInt32(2);
+                    repuesto.StockMinimo = reader.GetInt32(3); // Asegúrate de que la columna 'stock_minimo' esté incluida en tu SELECT si deseas obtenerla.
 
                     return repuesto;
                 }
@@ -55,30 +57,35 @@ public class DatosRepuestos
     // Obtener todos los Repuestos
     // Obtener solo los repuestos activos
     public List<Repuestos> ObtenerTodosLosRepuestos()
+{
+    List<Repuestos> lista = new List<Repuestos>();
+    Conexion conexion = new Conexion();
+
+    using (SqlConnection sql = conexion.obtenerConexion())
     {
-        List<Repuestos> lista = new List<Repuestos>();
-        Conexion conexion = new Conexion();
+        sql.Open();
+        string consulta = "SELECT id_repuesto, nombre, cantidad_disponible, stock_minimo FROM Repuestos";
+        SqlCommand comando = new SqlCommand(consulta, sql);
 
-        using (SqlConnection sql = conexion.obtenerConexion())
+        using (SqlDataReader reader = comando.ExecuteReader())
         {
-            sql.Open();
-            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible FROM Repuestos WHERE activo = 1";
-            SqlCommand comando = new SqlCommand(consulta, sql);
-
-            using (SqlDataReader reader = comando.ExecuteReader())
+            while (reader.Read())
             {
-                while (reader.Read())
-                {
-                    Repuestos r = new Repuestos();
-                    r.IdRepuesto = reader.GetInt32(0);
-                    r.Nombre = reader.GetString(1);
-                    r.CantidadDisponible = reader.GetInt32(2);
-                    lista.Add(r);
-                }
+                Repuestos r = new Repuestos();
+                
+                r.IdRepuesto = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                r.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
+                
+                // Protegemos campos numéricos que puedan venir nulos en la BD
+                r.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                r.StockMinimo = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+
+                lista.Add(r);
             }
         }
-        return lista;
     }
+    return lista;
+}
 
     // Actualizar el stock o nombre de un repuesto existente
     public int ActualizarRepuesto(Repuestos repuesto)
@@ -87,11 +94,12 @@ public class DatosRepuestos
         using (SqlConnection sql = conexion.obtenerConexion())
         {
             sql.Open();
-            string consulta = "UPDATE Repuestos SET nombre = @nombre, cantidad_disponible = @cantidad_disponible WHERE id_repuesto = @id_repuesto";
+            string consulta = "UPDATE Repuestos SET nombre = @nombre, cantidad_disponible = @cantidad_disponible, stock_minimo = @stock_minimo WHERE id_repuesto = @id_repuesto";
 
             SqlCommand comando = new SqlCommand(consulta, sql);
             comando.Parameters.AddWithValue("@nombre", repuesto.Nombre);
             comando.Parameters.AddWithValue("@cantidad_disponible", repuesto.CantidadDisponible);
+            comando.Parameters.AddWithValue("@stock_minimo", repuesto.StockMinimo);
             comando.Parameters.AddWithValue("@id_repuesto", repuesto.IdRepuesto);
 
             return comando.ExecuteNonQuery();
