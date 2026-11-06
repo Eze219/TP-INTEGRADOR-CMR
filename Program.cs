@@ -286,10 +286,83 @@ Usuarios VerificacionUsuarioContraseña()
     // Case 2: Agregar Repuesto
     static void GestionarAgregarRepuesto(Usuarios userAdmin)
     {
-        bool salirAgregarRepuesto = false;
-        while (!salirAgregarRepuesto)
-        {
-            Console.Clear();
+            /*string opcionAgregarRepuesto;
+                        bool salirAgregarRepuesto = false;
+
+                        while (!salirAgregarRepuesto)
+                        {
+                            Console.WriteLine("╔══════════════════════════════════════════╗");
+                            Console.WriteLine("║             AGREGAR REPUESTO             ║");
+                            Console.WriteLine("╠══════════════════════════════════════════╣");
+                            Console.WriteLine("║                                          ║");
+
+                            Console.Write("║   Nombre: ");
+                            string nombre = Console.ReadLine();
+
+                            Console.Write("║   Cantidad inicial: ");
+                            int cantidad = int.Parse(Console.ReadLine());
+
+                            Console.Write("║   Stock minimo: ");
+                            int stockMinimo = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("║                                          ║");
+                            Console.WriteLine("╠══════════════════════════════════════════╣");
+                            Console.WriteLine("║   1. Confirmar registro                  ║");
+                            Console.WriteLine("║   0. Cancelar                            ║");
+                            Console.WriteLine("╚══════════════════════════════════════════╝");
+
+                            Console.Write("Seleccione una opcion: ");
+                            opcionAgregarRepuesto = Console.ReadLine();
+
+                            if (opcionAgregarRepuesto == "1")
+                            {
+                                Repuestos nuevoRepuesto = new Repuestos();
+
+                                nuevoRepuesto.Nombre = nombre;
+                                nuevoRepuesto.CantidadDisponible = cantidad;
+                                nuevoRepuesto.StockMinimo = stockMinimo;
+
+                                DatosRepuestos dbRepuestos = new DatosRepuestos();
+
+                                int filasAfectadas = dbRepuestos.GuardarRepuestos(nuevoRepuesto);
+
+                                if (filasAfectadas > 0)
+                                {
+                                    Console.WriteLine("\nRepuesto agregado exitosamente.");
+
+                                    Repuestos repuestoGuardado = dbRepuestos.ObtenerRepuestoPorNombre(nombre);
+
+                                    int? idRepuestoObtenido = repuestoGuardado != null
+                                        ? repuestoGuardado.IdRepuesto
+                                        : (int?)null;
+
+                                    RegistrarMovimiento(userAdmin.IdUsuario, "Entrada", idRepuestoObtenido, null);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nNo se pudo registrar el repuesto.");
+                                }
+
+                                Console.WriteLine("\n¿Qué desea hacer?");
+                                Console.WriteLine("1. Agregar otro repuesto");
+                                Console.WriteLine("0. Volver al menu anterior");
+                                Console.Write("Seleccione una opcion: ");
+
+                                if (Console.ReadLine() == "0")
+                                {
+                                    salirAgregarRepuesto = true;
+                                }
+                            }
+                            else if (opcionAgregarRepuesto == "0")
+                            {
+                                salirAgregarRepuesto = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nOpcion incorrecta. Intente nuevamente.");
+                            }
+                        }
+            /*Console.Clear();
             Console.WriteLine("╔══════════════════════════════════════════╗");
             Console.WriteLine("║            AGREGAR REPUESTO              ║");
             Console.WriteLine("╠══════════════════════════════════════════╣");
@@ -349,9 +422,8 @@ Usuarios VerificacionUsuarioContraseña()
             {
                 Console.WriteLine("\n[Error] Opción no válida. Presione una tecla.");
                 Console.ReadKey();
-            }
+            }*/
         }
-    }
 
     // Case 3: Despachar Repuesto
     static void GestionarDespacharRepuesto(Usuarios userAdmin)
