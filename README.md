@@ -1,3 +1,43 @@
+# Programación
+# Sistema CMR (Control y Mantenimiento de Repuestos e Insumos)
+
+* **Grupo de Trabajo:** CMR
+* **Integrantes:** 
+  * Erika Cabrera
+  * Ezequiel Tomás Melano
+  * Ismael Ramos
+
+---
+
+## 1. Descripción breve del sistema
+El sistema CMR es una aplicación de consola desarrollada en C# y SQL Server diseñada para optimizar la administración de inventario, el control de stock de repuestos e insumos, y la trazabilidad de los movimientos operativos dentro de un taller de chapa y pintura.
+
+## 2. Principales funcionalidades
+* **Autenticación y Control de Roles:** Inicio de sesión diferenciado por perfiles de seguridad (`Admin` y `Empleado`), restringiendo el acceso a las funciones críticas de gestión.
+* **Gestión de Inventario (CRUD):** Alta, consulta, modificación y baja lógica (soft-delete) de repuestos e insumos.
+* **Módulo de Despachos y Movimientos:** Registro de entradas y salidas de materiales con actualización automática del stock.
+* **Alertas de Stock Mítico/Crítico:** Detección en tiempo real de quiebres de inventario o niveles inferiores al mínimo requerido, mostrando avisos dinámicos en consola.
+* **Historial de Auditoría:** Registro detallado de cada operación ejecutada vinculada al operador responsable.
+
+## 3. Requisitos necesarios para ejecutar el proyecto
+* **Entorno de ejecución:** .NET SDK (Versión 10.0 o superior).
+* **Base de datos:** Microsoft SQL Server (o SQL Server Express / LocalDB).
+* **Conector:** Paquete NuGet `Microsoft.Data.SqlClient`.
+* **Entorno de desarrollo recomendado:** Visual Studio Code o Visual Studio con .NET CLI instalado.
+
+## 4. Modo de uso
+1. **Configuración de la Base de Datos:** Ejecutar el script SQL provisto en el repositorio para crear la estructura de tablas (`Usuarios`, `Repuestos`, `Insumos`, `Historial`) e insertar los datos iniciales de prueba.
+2. **Cadena de Conexión:** Verificar que la cadena de conexión en el archivo de configuración del proyecto apunte correctamente a tu instancia local de SQL Server.
+3. **Ejecución:** Abrir la terminal en la carpeta raíz del proyecto y ejecutar el siguiente comando:
+   ```bash
+   dotnet run
+
+
+
+
+
+
+
 # Ética y Deontología Profesional
 **Grupo:** CMR Tech
 
