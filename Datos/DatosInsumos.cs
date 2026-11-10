@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class DatosInsumos
 {
-    // Guardar insumos nuevos
+    // Guardar insumos nuevos (incluyendo stock mínimo)
     public int GuardarInsumos(Insumos insumo)
     {
         Conexion conexion = new Conexion();
@@ -11,18 +11,19 @@ public class DatosInsumos
         {
             sql.Open();
             string consulta =
-            "INSERT INTO Insumos (nombre, cantidad_disponible, unidad_medida) VALUES (@nombre, @cantidad_disponible, @unidad_medida)";
+            "INSERT INTO Insumos (nombre, cantidad_disponible, unidad_medida, stock_minimo) VALUES (@nombre, @cantidad_disponible, @unidad_medida, @stock_minimo)";
             SqlCommand comando = new SqlCommand(consulta, sql);
 
             comando.Parameters.AddWithValue("@nombre", insumo.Nombre);
             comando.Parameters.AddWithValue("@cantidad_disponible", insumo.CantidadDisponible);
             comando.Parameters.AddWithValue("@unidad_medida", insumo.UnidadMedida);
+            comando.Parameters.AddWithValue("@stock_minimo", insumo.StockMinimo);
 
             return comando.ExecuteNonQuery();
         }
     }
 
-    // Buscar insumos por nombre (¡Agregado ID_insumo para que funcione el historial!)
+    // Buscar insumos por nombre
     public Insumos ObtenerInsumoPorNombre(string nombreInsumo)
     {
         Conexion conexion = new Conexion();
@@ -30,18 +31,20 @@ public class DatosInsumos
         using (SqlConnection sql = conexion.obtenerConexion())
         {
             sql.Open();
-            string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida FROM Insumos WHERE nombre = @nombre";
+            string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida, stock_minimo FROM Insumos WHERE nombre = @nombre";
             SqlCommand comando = new SqlCommand(consulta, sql);
             comando.Parameters.AddWithValue("@nombre", nombreInsumo);
+            
             using (SqlDataReader reader = comando.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     Insumos insumo = new Insumos();
-                    insumo.IdInsumo = reader.GetInt32(0);
-                    insumo.Nombre = reader.GetString(1);
-                    insumo.CantidadDisponible = reader.GetInt32(2);
-                    insumo.UnidadMedida = reader.GetString(3);
+                    insumo.IdInsumo = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                    insumo.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
+                    insumo.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                    insumo.UnidadMedida = reader.IsDBNull(3) ? "N/A" : reader.GetString(3);
+                    insumo.StockMinimo = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
 
                     return insumo;
                 }
@@ -51,35 +54,35 @@ public class DatosInsumos
     }
 
     // Obtener todos los insumos
-    // Obtener solo los insumos activos
-   public List<Insumos> ObtenerTodosLosInsumos()
-{
-    List<Insumos> lista = new List<Insumos>();
-    Conexion conexion = new Conexion();
-
-    using (SqlConnection sql = conexion.obtenerConexion())
+    public List<Insumos> ObtenerTodosLosInsumos()
     {
-        sql.Open();
-        string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida FROM Insumos";
-        SqlCommand comando = new SqlCommand(consulta, sql);
+        List<Insumos> lista = new List<Insumos>();
+        Conexion conexion = new Conexion();
 
-        using (SqlDataReader reader = comando.ExecuteReader())
+        using (SqlConnection sql = conexion.obtenerConexion())
         {
-            while (reader.Read())
-            {
-                Insumos i = new Insumos();
-                
-                i.IdInsumo = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
-                i.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
-                i.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
-                i.UnidadMedida = reader.IsDBNull(3) ? "N/A" : reader.GetString(3);
+            sql.Open();
+            string consulta = "SELECT ID_insumo, nombre, cantidad_disponible, unidad_medida, stock_minimo FROM Insumos";
+            SqlCommand comando = new SqlCommand(consulta, sql);
 
-                lista.Add(i);
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Insumos i = new Insumos();
+                    
+                    i.IdInsumo = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                    i.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
+                    i.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                    i.UnidadMedida = reader.IsDBNull(3) ? "N/A" : reader.GetString(3);
+                    i.StockMinimo = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
+
+                    lista.Add(i);
+                }
             }
         }
+        return lista;
     }
-    return lista;
-}
 
     // Actualizar el stock o datos de un insumo existente
     public int ActualizarInsumo(Insumos insumo)
@@ -88,18 +91,20 @@ public class DatosInsumos
         using (SqlConnection sql = conexion.obtenerConexion())
         {
             sql.Open();
-            string consulta = "UPDATE Insumos SET nombre = @nombre, cantidad_disponible = @cantidad_disponible, unidad_medida = @unidad_medida WHERE ID_insumo = @id_insumo";
+            string consulta = "UPDATE Insumos SET nombre = @nombre, cantidad_disponible = @cantidad_disponible, unidad_medida = @unidad_medida, stock_minimo = @stock_minimo WHERE ID_insumo = @id_insumo";
 
             SqlCommand comando = new SqlCommand(consulta, sql);
             comando.Parameters.AddWithValue("@nombre", insumo.Nombre);
             comando.Parameters.AddWithValue("@cantidad_disponible", insumo.CantidadDisponible);
             comando.Parameters.AddWithValue("@unidad_medida", insumo.UnidadMedida);
+            comando.Parameters.AddWithValue("@stock_minimo", insumo.StockMinimo);
             comando.Parameters.AddWithValue("@id_insumo", insumo.IdInsumo);
 
             return comando.ExecuteNonQuery();
         }
     }
-    // Baja Lógica para Insumos (UPDATE en vez de DELETE)
+
+    // Baja Lógica para Insumos
     public int EliminarInsumo(int idInsumo)
     {
         Conexion conexion = new Conexion();

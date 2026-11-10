@@ -57,35 +57,35 @@ public class DatosRepuestos
     // Obtener todos los Repuestos
     // Obtener solo los repuestos activos
     public List<Repuestos> ObtenerTodosLosRepuestos()
-{
-    List<Repuestos> lista = new List<Repuestos>();
-    Conexion conexion = new Conexion();
-
-    using (SqlConnection sql = conexion.obtenerConexion())
     {
-        sql.Open();
-        string consulta = "SELECT id_repuesto, nombre, cantidad_disponible, stock_minimo FROM Repuestos";
-        SqlCommand comando = new SqlCommand(consulta, sql);
+        List<Repuestos> lista = new List<Repuestos>();
+        Conexion conexion = new Conexion();
 
-        using (SqlDataReader reader = comando.ExecuteReader())
+        using (SqlConnection sql = conexion.obtenerConexion())
         {
-            while (reader.Read())
-            {
-                Repuestos r = new Repuestos();
-                
-                r.IdRepuesto = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
-                r.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
-                
-                // Protegemos campos numéricos que puedan venir nulos en la BD
-                r.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
-                r.StockMinimo = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+            sql.Open();
+            string consulta = "SELECT id_repuesto, nombre, cantidad_disponible, stock_minimo FROM Repuestos";
+            SqlCommand comando = new SqlCommand(consulta, sql);
 
-                lista.Add(r);
+            using (SqlDataReader reader = comando.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Repuestos r = new Repuestos();
+
+                    r.IdRepuesto = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                    r.Nombre = reader.IsDBNull(1) ? "Sin nombre" : reader.GetString(1);
+
+                    // Protegemos campos numéricos que puedan venir nulos en la BD
+                    r.CantidadDisponible = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                    r.StockMinimo = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+
+                    lista.Add(r);
+                }
             }
         }
+        return lista;
     }
-    return lista;
-}
 
     // Actualizar el stock o nombre de un repuesto existente
     public int ActualizarRepuesto(Repuestos repuesto)
