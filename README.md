@@ -33,10 +33,48 @@ El sistema CMR es una aplicación de consola desarrollada en C# y SQL Server dis
    dotnet run
 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Sistemas y Organizaciones: Enfoque Sistémico y Controles 
+
+## 1. Descripción desde el Enfoque Sistémico (TGS)
+El sistema **CMR** funciona como un sistema abierto e informatizado que interactúa con su entorno (el taller de chapa y pintura) transformando datos operativos en información útil para la toma de decisiones.
+
+* **Entradas (Inputs):**
+  * Credenciales de acceso de los usuarios (`Usuario` y `Contraseña`).
+  * Datos de alta, modificación o baja de repuestos e insumos (códigos, descripciones, precios, umbrales de stock mínimo).
+  * Registro de operaciones de despacho (entradas y salidas de stock con cantidades y operador responsable).
+* **Procesos (Transformation Process):**
+  * Validación de credenciales contra la base de datos relacional en SQL Server mediante consultas parametrizadas.
+  * Ejecución de reglas de negocio en C# para el control de roles (`Admin` y `Empleado`).
+  * Recálculo automático de existencias en el inventario al registrar nuevos movimientos.
+  * Verificación en tiempo real de niveles de stock en comparación con el umbral crítico configurado.
+* **Salidas (Outputs):**
+  * Pantallas de consola interactivas con listados de inventario y tablas de stock actualizadas.
+  * Alertas visuales en pantalla por quiebres o niveles de stock crítico.
+  * Registro histórico de auditoría de movimientos almacenado en la base de datos.
+* **Mecanismos de Retroalimentación (Feedback):**
+  * Avisos y mensajes de error o éxito en consola ante operaciones inválidas (por ejemplo, intentar retirar más stock del disponible o credenciales incorrectas), permitiendo al operador corregir la acción de manera inmediata.
+  * Actualización instantánea de los paneles de control que guían al administrador en la reposición de materiales.
+
+## 2. Controles Organizacionales e Informáticos Embebidos en el Software
+Para garantizar la integridad de los datos, evitar errores operativos y proteger la seguridad de la información del taller, el sistema incorpora los siguientes mecanismos de control:
+
+* **Control de Acceso Basado en Roles (RBAC):**
+  * *Informático:* El sistema evalúa el rol del usuario autenticado en la tabla de usuarios (`Admin` o `Empleado`) antes de permitir el acceso a los menús de configuración o gestión avanzada, restringiendo funciones críticas mediante lógica condicional en C#.
+  * *Organizacional:* Asegura la segregación de funciones, evitando que operarios sin autorización modifiquen catálogos de precios o parámetros globales del taller.
+* **Controles de Integridad y Validación de Datos:**
+  * *Informático:* Uso de tipos de datos estrictos en C# y restricciones a nivel de base de datos en SQL Server (como claves primarias, foráneas y validación de campos obligatorios) para impedir registros inconsistentes o huérfanos.
+  * *Organizacional:* Previene errores operativos de carga mediante validaciones previas que impiden ingresar números negativos, campos vacíos o cantidades ilógicas en el inventario.
+* **Control de Stock Mínimo y Prevención de Quiebres:**
+  * *Informático:* El código evalúa de manera automática la condición de stock crítico (`Cantidad <= StockMinimo`) cada vez que se procesa una salida.
+  * *Organizacional:* Protege la continuidad operativa del taller al alertar anticipadamente la necesidad de reabastecer repuestos esenciales.
+* **Trazabilidad y Auditoría de Movimientos:**
+  * *Informático:* Cada operación de inventario genera un registro automático en la tabla `Historial`, vinculando la acción con la fecha y el usuario responsable.
+  * *Organizacional:* Facilita la rendición de cuentas, el control de pérdidas y la detección temprana de discrepancias en el inventario físico frente al sistema.
 
 
-
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Ética y Deontología Profesional
 **Grupo:** CMR Tech
