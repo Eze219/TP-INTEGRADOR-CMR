@@ -80,9 +80,9 @@ El sistema de gestión CMR (Control y Mantenimiento de Repuestos e Insumos) es u
 **Aportes del equipo:**
 | Nombre | Aportes al equipo |
 | - | - |
-| Erika Cabrera |  |
-| Ezequiel Tomás Melano | Desarrollo de la lógica general en C#, arquitectura del sistema de consola, diseño de la base de datos relacional en SQL Server (tablas Usuarios, Repuestos, Insumos, Historial), implementación de menús de navegación, validaciones de stock mínimo, gestión de control de accesos por roles (Admin/Empleado) y redacción de la documentación técnica y ética del proyecto. |
-| Ismael Ramos |  |
+| Erika Cabrera | Desarrollo y gestión de la base de datos, implementación del sistema de inicio de sesión del programa, identificación del tipo de organización, sus objetivos generales y los sectores y roles involucrados, y elaboración del diagrama de flujo por carriles para representar el proceso actual de la organización. |
+| Ezequiel Tomás Melano | Desarrollo integral del código fuente en C#, creación de clases y arquitectura del sistema de consola, diseño e implementación de la base de datos relacional en SQL Server (tablas `Usuarios`, `Repuestos`, `Insumos`, `Historial`), configuración de la conexión a la base de datos, desarrollo de todas las funcionalidades del sistema, validaciones de stock mínimo, gestión de control de accesos por roles (`Admin`/`Empleado`), verificación y pruebas de funcionamiento, y redacción de la documentación técnica, ética y de deontología profesional.|
+| Ismael Ramos | Realización de entrevistas y relevamiento de requisitos, definición de las funcionalidades del sistema, desarrollo y diseño de los menús de usuario en consola, colaboración en el desarrollo del código fuente y revisión visual de las interfaces y elementos presentados por consola. |
 
 | Material utilizado | Fuente oficial y versión | Licencia o autorización | Condiciones relevantes y cómo las cumplimos |
 | - | - | - | - |
